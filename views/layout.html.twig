@@ -1,19 +1,58 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>ToDoApp - {% block title %}{% endblock %}</title>
+    <!-- Google icons font -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css', 'bootstrap') }}">
+    <!-- My css -->
     <link rel="stylesheet" href="{{ asset('todoapp.css', 'css') }}">
+    <!-- Google icon size style -->
+    <link rel="stylesheet" href="{{ asset('googleiconstyle.css', 'css') }}">
 </head>
 <body>
+
+<nav class="navbar navbar-dark navbar-expand-lg bg-dark">
+    <a href="{{ path('home') }}" class="navbar-brand">Todo</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse"  data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon">
+        </span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a href="{{ path('home') }}" class="nav-link">Home</a>
+            </li>
+        </ul>
+
+        <ul class="navbar-nav">
+            <li class="nav-item m-1">
+                <a href="#" class="btn btn-primary">S'inscrire</a>
+            </li>
+            <li class="nav-item m-1">
+                <a href="#" class="btn btn-secondary">Se connecter</a>
+            </li>
+        </ul>
+    </div>
+
+</nav>
 
 {% block content %}
 
 {% endblock %}
+
+<footer class="footer">
+    <div class="container footer-container">
+
+    </div>
+
+</footer>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
