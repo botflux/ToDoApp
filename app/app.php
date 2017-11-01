@@ -29,11 +29,14 @@ $app->register(new \Silex\Provider\MonologServiceProvider(), [
 
 $app->register(new Silex\Provider\DoctrineServiceProvider());
 $app->register(new Silex\Provider\SessionServiceProvider());
+$app->register(new Silex\Provider\CsrfServiceProvider());
 $app->register(new Silex\Provider\SecurityServiceProvider(), [
     'security.firewalls' => [
+        'login' => [
+            'pattern' => '^/login$',
+        ],
         'secured' => [
-            'pattern' => '^/',
-            'anonymous' => true,
+            'pattern' => '^.*$',
             'form' => [
                 'login_path' => '/login',
                 'check_path' => '/login_check',

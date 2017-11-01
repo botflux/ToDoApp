@@ -1,8 +1,20 @@
-{% extends "layout.html.twig" %}
-
-{% block title %}Connexion{% endblock %}
-
-{% block content %}
+<!doctype html>
+<html lang="fr">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>ToDoApp - Connexion</title>
+    <!-- Google icons font -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css', 'bootstrap') }}">
+    <!-- My css -->
+    <link rel="stylesheet" href="{{ asset('todoapp.css', 'css') }}">
+    <!-- Google icon size style -->
+    <link rel="stylesheet" href="{{ asset('googleiconstyle.css', 'css') }}">
+</head>
+<body>
     <div class="container">
         <div class="card bg-light card-mg">
             <div class="card-header">
@@ -12,7 +24,7 @@
                 <form action="{{ path('login_check') }}" method="post">
                     <div class="form-group">
                         <label for="username" class="form-control-label">Nom d'utilisateur</label>
-                        <input type="text" id="username" class="form-control" name="_username" value="">
+                        <input type="text" id="username" class="form-control" name="_username" value="{{ last_username }}">
                     </div>
                     <div class="form-group">
                         <label for="password" class="form-control-label">Mot de passe</label>
@@ -33,4 +45,10 @@
             </div>
         </div>
     </div>
-{% endblock %}
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="{{ asset('js/bootstrap.min.js', 'bootstrap') }}"></script>
+</body>
+</html>

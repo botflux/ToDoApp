@@ -16,13 +16,9 @@ $app->get('/', function () use ($app) {
 ->bind('home');
 
 $app->match('/login', function (Request $request) use ($app) {
-
-    if ($app['security.authorization_checker']->isGranted('IS_AUTHENTICATED_FULLY')) {
-        return $app->redirect('/');
-    }
-
     return $app['twig']->render('login.html.twig', [
         'error' => $app['security.last_error']($request),
+        'last_username' => $app['session']->get('_security.last_username'),
     ]);
 })
 ->bind('login');
