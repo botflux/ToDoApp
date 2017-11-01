@@ -30,17 +30,27 @@
                 <a href="{{ path('home') }}" class="nav-link">Home</a>
             </li>
         </ul>
-
         <ul class="navbar-nav">
+            {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Compte
+                </button>
+
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+                    <a href="{{ path('logout') }}" class="dropdown-item">Se deconnecter</a>
+                </div>
+            </div>
+            {% else %}
             <li class="nav-item m-1">
-                <a href="#" class="btn btn-primary">S'inscrire</a>
+                <a href="{{ path('user_register') }}" class="btn btn-primary">S'inscrire</a>
             </li>
             <li class="nav-item m-1">
-                <a href="#" class="btn btn-secondary">Se connecter</a>
+                <a href="{{ path('login') }}" class="btn btn-secondary">Se connecter</a>
             </li>
+            {% endif %}
         </ul>
     </div>
-
 </nav>
 
 {% block content %}

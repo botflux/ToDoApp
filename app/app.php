@@ -23,3 +23,47 @@ $app->register(new Silex\Provider\AssetServiceProvider(), [
         ],
     ],
 ]);
+$app->register(new \Silex\Provider\MonologServiceProvider(), [
+    'monolog.logfile' => __DIR__.'/../development.log',
+]);
+
+$app->register(new Silex\Provider\DoctrineServiceProvider());
+$app->register(new Silex\Provider\SessionServiceProvider());
+$app->register(new Silex\Provider\SecurityServiceProvider(), [
+    'security.firewalls' => [
+        'secured' => [
+            'pattern' => '^/',
+            'anonymous' => true,
+            'form' => [
+                'login_path' => '/login',
+                'check_path' => '/login_check',
+            ],
+            'logout' => [
+                'logout_path' => '/logout',
+                'invalidate_session' => true,
+            ],
+            'users' => function () use ($app) {
+                return new \Todo\DAO\UserDAO($app['db']);
+            },
+        ],
+    ],
+    'security.role_hierarchy' => [
+        'ROLE_ADMIN' => [
+            'ROLE_USER'
+        ],
+    ],
+    'security.access_rules' => [
+        [
+            '^/admin',
+            'ROLE_ADMIN'
+        ],
+        [
+            '^/app',
+            'ROLE_USER',
+        ],
+    ],
+]);
+
+$app['dao.user'] = function () use ($app) {
+    return new \Todo\DAO\UserDAO($app['db']);
+};

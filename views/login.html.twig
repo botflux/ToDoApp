@@ -1,0 +1,36 @@
+{% extends "layout.html.twig" %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <div class="card bg-light card-mg">
+            <div class="card-header">
+                <h1 class="card-title display-4">Connexion</h1>
+            </div>
+            <div class="card-body">
+                <form action="{{ path('login_check') }}" method="post">
+                    <div class="form-group">
+                        <label for="username" class="form-control-label">Nom d'utilisateur</label>
+                        <input type="text" id="username" class="form-control" name="_username" value="">
+                    </div>
+                    <div class="form-group">
+                        <label for="password" class="form-control-label">Mot de passe</label>
+                        <input type="password" id="password" name="_password" value="" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn btn-primary">Connexion</button>
+                    </div>
+                </form>
+
+                {% if error is defined %}
+                    {% if not error is null %}
+                        <div class="alert alert-danger">
+                            {{ error }}
+                        </div>
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

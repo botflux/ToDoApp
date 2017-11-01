@@ -5,3 +5,5 @@
  * Date: 31/10/2017
  * Time: 00:49
  */
+
+$app['debug'] = true;
