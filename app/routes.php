@@ -23,7 +23,7 @@ $app->match('/login', function (Request $request) use ($app) {
 })
 ->bind('login');
 
-$app->match('/register', function(Request $request) use ($app){
-    return $app['twig']->render('user_form.html.twig');
+$app->match('/settings/{id}', function (Request $request, $id) use ($app) {
+    return $app->redirect('/');
 })
-->bind('user_register');
+->bind('settings');
