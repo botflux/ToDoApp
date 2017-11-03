@@ -1,0 +1,97 @@
+{% extends "layout_panel_1.html.twig" %}
+
+{% block title %}Paramètre de compte{% endblock %}
+
+{% block dashboard_left %}
+    <div class="card">
+        <div class="list-group list-group-flush">
+            <span class="list-group-item bg-light">Paramètre du compte</span>
+            <a href="#" class="list-group-item list-group-item-action active">Compte</a>
+            <a href="#" class="list-group-item list-group-item-action">Action</a>
+            <a href="#" class="list-group-item list-group-item-action">Action</a>
+            <a href="#" class="list-group-item list-group-item-action">Action</a>
+            <a href="#" class="list-group-item list-group-item-action">Action</a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block content %}
+    <h3>Nom d'utilisateur</h3>
+    <hr>
+    {{ form_start(usernameForm) }}
+    <div class="form-group">
+    {{ form_label(usernameForm.username, null, {
+        'label_attr': {'class': 'form-control-label'}
+    }) }}
+    {{ form_widget(usernameForm.username, {'attr': {'class': 'form-control'}}) }}
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Mettre à jour</button>
+    </div>
+    {{ form_end(usernameForm) }}
+    {% for message in app.session.flashBag.get('success_username') %}
+    <div class="alert alert-success">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% for message in app.session.flashBag.get('fail_username') %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <div class="todoapp-margin"></div>
+
+    <h3>Mot de passe</h3>
+    <hr>
+    {{ form_start(passwordForm) }}
+    <div class="form-group">
+        {{ form_label(passwordForm.last_password, null, {
+            'label_attr': {'class': 'form-control-label'}
+        }) }}
+        {{ form_widget(passwordForm.last_password, {
+            'attr': {
+                'class': 'form-control'
+            }
+        }) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(passwordForm.password.first, null, {
+            'label_attr': {
+                'class': 'form-control-label'
+            }
+        }) }}
+        {{ form_widget(passwordForm.password.first, {
+            'attr': {
+                'class': 'form-control'
+            }
+        }) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(passwordForm.password.second, null, {
+            'label_attr': {
+                'class': 'form-control-label'
+            }
+        }) }}
+        {{ form_widget(passwordForm.password.second, {
+            'attr': {
+                'class': 'form-control'
+            }
+        }) }}
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Mettre à jour</button>
+    </div>
+    {{ form_end(passwordForm) }}
+    {% for message in app.session.flashBag.get('success_password') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    {% for message in app.session.flashBag.get('fail_password') %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <div class="todoapp-margin"></div>
+{% endblock %}
