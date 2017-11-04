@@ -75,3 +75,9 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), [
 $app['dao.user'] = function () use ($app) {
     return new \Todo\DAO\UserDAO($app['db']);
 };
+
+$app['dao.article'] = function () use ($app) {
+    $articlesDAO = new \Todo\DAO\ArticleDAO($app['db']);
+    $articlesDAO->setUserDao($app['dao.user']);
+    return $articlesDAO;
+};

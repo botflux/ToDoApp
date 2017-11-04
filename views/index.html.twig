@@ -8,18 +8,38 @@
         <div class="container">
             <h1 class="display-1">Bienvenue sur Todo app</h1>
             <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Harum, necessitatibus, repellat. Beatae consequuntur incidunt itaque iure laboriosam magnam molestias nihil nulla, reiciendis sapiente unde, voluptate. Amet ipsa sunt tenetur vero.</p>
-            <a href="#whatis" class="btn btn-primary btn-lg">En savoir plus</a>
+            <a href="#" class="btn btn-primary btn-lg">En savoir plus</a>
         </div>
     </div>
 
     <div class="container">
-        <h3 id="whatis" class="display-4">Qu'est ce que Todo app?</h3>
-        <hr />
-        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam at debitis, dicta dignissimos dolorem doloribus eius esse excepturi fuga ipsum itaque odio, odit pariatur quia repellat repellendus, sit tempora temporibus. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab alias aliquid debitis earum eius enim esse explicabo incidunt iste libero minima molestias numquam obcaecati perspiciatis quae, reiciendis sint, tempora vitae.</p>
+        <h3>Vos slides</h3>
+        <hr>
+        {% for article in userArticles %}
+            <div class="card todoapp-m-b">
+                <div class="card-body">
+                    <h5 class="card-title">{{ article.title }}</h5>
+                    <p class="card-text">{{ article.content }}</p>
+                    <small class="text-muted">{{ article.date }}</small>
+                </div>
+            </div>
+        {% else %}
+            <p>Vous n'avez pas encore créé de slides.</p>
+        {% endfor %}
 
-        <h3 class="display-4">Comment fonctionne Todo app?</h3>
-        <hr />
-        <p class="lead">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea eos esse hic. Accusantium assumenda, eveniet magnam nisi odit omnis praesentium quasi veritatis. Consequuntur laborum recusandae soluta! Aliquam est maiores repudiandae. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Architecto autem, blanditiis eos hic in ipsam laborum magni minus mollitia, nesciunt repellat, soluta voluptas voluptates? At atque quos reiciendis tempore voluptatum! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab cupiditate doloribus enim fuga hic libero, magni non officiis, repellat sapiente sequi soluta tempora unde voluptatem voluptatum? Amet doloribus possimus suscipit.</p>
+        <div class="todoapp-margin"></div>
+        <h3>Toutes les slides</h3>
+        <hr>
+        {% for article in allArticles %}
+            <div class="card todoapp-m-b">
+                <div class="card-body">
+                    <h5 class="card-title">{{ article.title }}</h5>
+                    <p class="card-text">{{ article.content }}</p>
+                    <small class="text-muted">{{ article.date }}</small>
+                </div>
+            </div>
+        {% else %}
+            <p>Aucun article créé</p>
+        {% endfor %}
     </div>
-
 {% endblock %}

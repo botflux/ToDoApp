@@ -11,7 +11,13 @@ use Symfony\Component\HttpFoundation\Response;
 
 # Page d'accueil
 $app->get('/', function () use ($app) {
-    return $app['twig']->render('index.html.twig');
+    $userArticles = $app['dao.article']->findByUser($app['security.token_storage']->getToken()->getUser());
+    $articles = $app['dao.article']->findAll();
+
+    return $app['twig']->render('index.html.twig', [
+        'userArticles' => $userArticles,
+        'allArticles' => $articles,
+    ]);
 })
 ->bind('home');
 
@@ -23,6 +29,7 @@ $app->match('/login', function (Request $request) use ($app) {
 })
 ->bind('login');
 
+# route vers les options utilisateurs
 $app->match('/settings', function (Request $request) use ($app) {
     $token = $app['security.token_storage']->getToken();
     $user = null;
