@@ -104,6 +104,27 @@ $app->match('/settings', function (Request $request) use ($app) {
 })
 ->bind('settings');
 
+$app->get('/articles', function (Request $request) use ($app) {
+    
+    $filter = $request->get('articles');
+
+    // met par defaut a all 
+    $filter = ($filter === null)? 'all': $filter;
+
+    if ($filter === 'my') {
+        $articles = $app['dao.article']->findByUser($app['security.token_storage']->getToken()->getUser());
+        
+    } else {
+        $articles = $app['dao.article']->findAll();
+    }
+    return $app['twig']->render('articles.html.twig', [
+        'articles' => $articles,
+        'filter' => $filter,
+    ]);
+
+})
+->bind('articles');
+
 # génère un mot de passe
 $app->get('/mtp/{m}', function ($m) use ($app) {
 
@@ -111,7 +132,6 @@ $app->get('/mtp/{m}', function ($m) use ($app) {
     $salt = password_hash($randomBinaryString, \PASSWORD_BCRYPT);
     $salt = substr($salt,0,23);
     var_dump($salt);
-
 
     $encoder = new \Symfony\Component\Security\Core\Encoder\BCryptPasswordEncoder(13);
     $hash = $encoder->encodePassword($m, $salt);
