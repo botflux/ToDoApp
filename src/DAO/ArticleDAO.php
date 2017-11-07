@@ -80,4 +80,29 @@ class ArticleDAO extends DAO
 
         return $article;
     }
+
+    /**
+     * @param Article
+     */
+    public function save (Article $article)
+    {
+        var_dump('here');
+
+        $row = [
+            'art_id' => $article->getId(),
+            'art_title' => $article->getTitle(),
+            'art_content' => $article->getContent(),
+            'art_date' => $article->getDate(),
+            'usr_id' => $article->getUser()->getId(),
+        ];
+
+        if ($article->getId()) {
+            $this->getDb()->update('t_articles', $row, [
+                'art_id' => $article->getId(),
+            ]);
+        } else {
+            $this->getDb()->insert('t_articles', $row);
+            $article->setId($this->getDb->lastInsertId());
+        }
+    }
 }

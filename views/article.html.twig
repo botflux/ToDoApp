@@ -1,0 +1,25 @@
+{% extends "layout_panel_1.html.twig" %}
+{% block title %}{{ article.title }}{% endblock %}
+
+
+{% block dashboard_left %}
+
+    <div class="card">
+        <div class="list-group list-group-flush">
+            <span class="list-group-item bg-light">Actions</span>
+            <a href="{{ path('article_edit', {'id': article.id}) }}" class="list-group-item list-group-item-action">Modifier</a>
+            <a href="#" class="list-group-item list-group-item-action">Suppimer</a>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block content %}
+    <article>
+        <h2>{{ article.title }}</h2>
+        <p>{{ article.content }}</p>
+        <p>Date de création: <strong>{{ article.date }}</strong></p>
+        <p>Utilisateur: <strong>{{ article.user.username }}</strong></p>
+    </article>
+{% endblock %}

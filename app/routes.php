@@ -125,6 +125,40 @@ $app->get('/articles', function (Request $request) use ($app) {
 })
 ->bind('articles');
 
+$app->get('/article/{id}', function ($id) use ($app) {
+    $article = $app['dao.article']->find($id);
+
+    return $app['twig']->render('article.html.twig', [
+        'article' => $article,
+    ]);
+})
+->bind('article');
+
+$app->match('/article/edit/{id}', function (Request $request, $id) use ($app) {
+    $article = $app['dao.article']->find($id);
+
+    $articleForm = $app['form.factory']->create(\Todo\Form\Type\ArticleType::class, $article);
+
+    $articleForm->handleRequest($request);
+
+    if ($articleForm->isSubmitted()) {
+        if ($articleForm->isValid()) {
+            $app['dao.article']->save($article);
+            $app['session']->getFlashBag()->add('success_article', 'L\'article a bien été modifié');
+        } else {
+            foreach ($app['validator']->validate($articleForm) as $err) {
+                $app['session']->getFlashBag()->add('fail_article', $err->getMessage());
+            }
+        }
+    }
+
+    return $app['twig']->render('article_form.html.twig', [
+        'article' => $article,
+        'articleForm' => $articleForm->createView(),
+    ]);
+})
+->bind('article_edit');
+
 # génère un mot de passe
 $app->get('/mtp/{m}', function ($m) use ($app) {
 
