@@ -29,3 +29,7 @@ body {
 .todoapp-m-b {
     margin: 1rem 0;
 }
+
+.todoapp-margin-bottom {
+    margin-bottom: 2rem;
+}

@@ -10,13 +10,22 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 # Page d'accueil
-$app->get('/', function () use ($app) {
-    $userArticles = $app['dao.article']->findByUser($app['security.token_storage']->getToken()->getUser());
-    $articles = $app['dao.article']->findAll();
+$app->get('/', function (Request $request) use ($app) {
+    
+    $filter = $request->get('articles');
+    
+    // met par defaut a all 
+    $filter = ($filter === null)? 'all': $filter;
 
+    if ($filter === 'my') {
+        $articles = $app['dao.article']->findByUser($app['security.token_storage']->getToken()->getUser());
+        
+    } else {
+        $articles = $app['dao.article']->findAll();
+    }
     return $app['twig']->render('index.html.twig', [
-        'userArticles' => $userArticles,
-        'allArticles' => $articles,
+        'articles' => $articles,
+        'filter' => $filter,
     ]);
 })
 ->bind('home');
@@ -104,26 +113,34 @@ $app->match('/settings', function (Request $request) use ($app) {
 })
 ->bind('settings');
 
-$app->get('/articles', function (Request $request) use ($app) {
+$app->match('/article/add', function (Request $request) use ($app) {
     
-    $filter = $request->get('articles');
+    $article = new \Todo\Domain\Article();
+    $article->setTitle('')
+            ->setContent('');
+    $articleForm = $app['form.factory']->create(\Todo\Form\Type\ArticleType::class, $article);
 
-    // met par defaut a all 
-    $filter = ($filter === null)? 'all': $filter;
+    $articleForm->handleRequest($request);
 
-    if ($filter === 'my') {
-        $articles = $app['dao.article']->findByUser($app['security.token_storage']->getToken()->getUser());
-        
-    } else {
-        $articles = $app['dao.article']->findAll();
+    if ($articleForm->isSubmitted()) {
+        if ($articleForm->isValid()) {
+
+            $article->setUser($app['security.token_storage']->getToken()->getUser());
+            $article->setDate(date('Y-m-d H:i:s'));
+            $app['dao.article']->save($article);
+            $app['session']->getFlashBag()->add('success_article', 'L\'article a bien été ajouté');
+        } else {
+            foreach ($app['validator']->validate($articleForm) as $err) {
+                $app['session']->getFlashBag()->add('fail_article', $err->getMessage());
+            }
+        }
     }
-    return $app['twig']->render('articles.html.twig', [
-        'articles' => $articles,
-        'filter' => $filter,
-    ]);
 
+    return $app['twig']->render('article_form.html.twig', [
+        'articleForm' => $articleForm->createView(),
+    ]);
 })
-->bind('articles');
+->bind('article_create');
 
 $app->get('/article/{id}', function ($id) use ($app) {
     $article = $app['dao.article']->find($id);
@@ -133,6 +150,8 @@ $app->get('/article/{id}', function ($id) use ($app) {
     ]);
 })
 ->bind('article');
+
+
 
 $app->match('/article/edit/{id}', function (Request $request, $id) use ($app) {
     $article = $app['dao.article']->find($id);

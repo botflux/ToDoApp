@@ -86,7 +86,6 @@ class ArticleDAO extends DAO
      */
     public function save (Article $article)
     {
-        var_dump('here');
 
         $row = [
             'art_id' => $article->getId(),
@@ -102,7 +101,7 @@ class ArticleDAO extends DAO
             ]);
         } else {
             $this->getDb()->insert('t_articles', $row);
-            $article->setId($this->getDb->lastInsertId());
+            $article->setId($this->getDb()->lastInsertId());
         }
     }
 }
