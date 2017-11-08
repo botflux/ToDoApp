@@ -24,8 +24,13 @@ $app->match('/login', function (Request $request) use ($app) {
 })
 ->bind('login');
 
+$app->match('/register', function (Request $request) use ($app) {
+    return '';
+})
+->bind('register');
+
 # route vers les options utilisateurs
-$app->match('/settings', function (Request $request) use ($app) {
+$app->match('/app/settings', function (Request $request) use ($app) {
     $token = $app['security.token_storage']->getToken();
     $user = null;
 

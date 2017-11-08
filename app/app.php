@@ -37,11 +37,9 @@ $app->register(new Silex\Provider\SessionServiceProvider());
 $app->register(new Silex\Provider\CsrfServiceProvider());
 $app->register(new Silex\Provider\SecurityServiceProvider(), [
     'security.firewalls' => [
-        'login' => [
-            'pattern' => '^/login$',
-        ],
         'secured' => [
-            'pattern' => '^.*$',
+            'pattern' => '^/',
+            'anonymous' => true,
             'form' => [
                 'login_path' => '/login',
                 'check_path' => '/login_check',
@@ -66,7 +64,7 @@ $app->register(new Silex\Provider\SecurityServiceProvider(), [
             'ROLE_ADMIN'
         ],
         [
-            '^/',
+            '^/app',
             'ROLE_USER',
         ],
     ],
