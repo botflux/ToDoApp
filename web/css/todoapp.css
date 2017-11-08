@@ -1,13 +1,3 @@
-.footer {
-    min-height: 200px;
-    margin-top: 3rem;
-    background-color: #222222;
-    color: white;
-    padding-top: 1rem;
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-}
 
 html {
     position:relative;
@@ -18,18 +8,38 @@ body {
     padding-bottom: 350px;
 }
 
-.card-mg {
-    margin: 3rem 0;
+.todo__footer {
+    min-height: 200px;
+    background-color: #222222;
+    color: white;
+    padding-top: 1rem;
+    width: 100%;
+    position: absolute;
+    bottom: 0;
 }
 
-.todoapp-margin {
-    margin: 3rem 0;
+.todo__margin-bottom-1 {
+    margin-bottom: 1rem;
 }
-
-.todoapp-m-b {
-    margin: 1rem 0;
-}
-
-.todoapp-margin-bottom {
+.todo__margin-bottom-2 {
     margin-bottom: 2rem;
+}
+.todo__margin-bottom-3 {
+    margin-bottom: 3rem;
+}
+.todo__margin-bottom-4 {
+    margin-bottom: 4rem;
+}
+
+.todo__margin-top-1 {
+    margin-top: 1rem;
+}
+.todo__margin-top-2 {
+    margin-top: 2rem;
+}
+.todo__margin-top-3 {
+    margin-top: 3rem;
+}
+.todo__margin-top-4 {
+    margin-top: 4rem;
 }
