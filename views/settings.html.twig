@@ -37,6 +37,48 @@
     {% endfor %}
     <div class="todo__margin-bottom-2"></div>
 
+    {{ form_start(fullUsernameForm) }}
+    <div class="form-group">
+        {{ form_label(fullUsernameForm.firstName, null, {
+            'label_attr': {
+                'class': 'form-control-label'
+            }
+        }) }}
+        {{ form_widget(fullUsernameForm.firstName, {
+            'attr': {
+                'class': 'form-control'
+            }
+        }) }}
+    </div>
+    <div class="form-group">
+        {{ form_label(fullUsernameForm.lastName, null, {
+            'label_attr': {
+                'class': 'form-control-label'
+            }
+        }) }}
+        {{ form_widget(fullUsernameForm.lastName, {
+            'attr': {
+                'class': 'form-control'
+            }
+        }) }}
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary">Modifier</button>
+    </div>
+    {{ form_end(fullUsernameForm) }}
+    {% for message in app.session.flashBag.get('success_cusername') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    {% for message in app.session.flashBag.get('fail_cusername') %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
+    <div class="todo__margin-bottom-2"></div>
+
     <h3>Mot de passe</h3>
     <hr>
     {{ form_start(passwordForm) }}

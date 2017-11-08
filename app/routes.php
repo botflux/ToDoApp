@@ -40,9 +40,11 @@ $app->match('/app/settings', function (Request $request) use ($app) {
 
     $usernameForm = $app['form.factory']->create(\Todo\Form\Type\UsernameType::class, null);
     $passwordForm = $app['form.factory']->create(\Todo\Form\Type\PasswordChangedType::class, null);
+    $fullUsernameForm = $app['form.factory']->create(\Todo\Form\Type\CompleteUsernameType::class, $user);
 
     $usernameForm->handleRequest($request);
     $passwordForm->handleRequest($request);
+    $fullUsernameForm->handleRequest($request);
 
     if ($usernameForm->isSubmitted()) {
         if ($usernameForm->isValid()) {
@@ -97,9 +99,21 @@ $app->match('/app/settings', function (Request $request) use ($app) {
         }
     }
 
+    if ($fullUsernameForm->isSubmitted()) {
+        if ($fullUsernameForm->isValid()) {
+            $app['dao.user']->save($user);
+            $app['session']->getFlashBag()->add('success_cusername', 'Nom a bien été changé');
+        } else {
+            foreach($app['validator']->validate($fullUsernameForm) as $err) {
+                $app['session']->getFlashBag()->add('fail_cusername', $err->getMessage());
+            }
+        }
+    }
+
     return $app['twig']->render('settings.html.twig', [
         'usernameForm' => $usernameForm->createView(),
         'passwordForm' => $passwordForm->createView(),
+        'fullUsernameForm' => $fullUsernameForm->createView(),
     ]);
 })
 ->bind('settings');

@@ -8,7 +8,6 @@
 
 namespace Todo\Domain;
 
-
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class User implements UserInterface
@@ -38,6 +37,52 @@ class User implements UserInterface
      * VALUES: ROLE_USER or ROLE_ADMIN
      */
     private $role;
+
+    /**
+     * @var string
+     */
+    private $firstName;
+
+    /**
+     * @var string
+     */
+    private $lastName;
+
+    /**
+     * @param string $firstName
+     * @return User
+     */
+    public function setFirstName (string $firstName)
+    {
+        $this->firstName = $firstName;
+        return $this;
+    }
+
+    /**
+     * @return string $firstName
+     */
+    public function getFirstName ()
+    {
+        return $this->firstName;
+    }
+
+    /**
+     * @param string $lastName
+     * @return User
+     */
+    public function setLastName (string $lastName)
+    {
+        $this->lastName = $lastName;
+        return $this;
+    }
+
+    /**
+     * @return string $lastName
+     */
+    public function getLastName ()
+    {
+        return $this->lastName;
+    }
 
     /**
      * @param string $username
@@ -133,6 +178,7 @@ class User implements UserInterface
     {
         // TODO: Implement eraseCredentials() method.
     }
+    
     public function getRoles() : array
     {
         return [$this->getRole()];
