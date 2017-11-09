@@ -12,7 +12,10 @@ use Symfony\Component\HttpFoundation\Response;
 # Page d'accueil
 $app->get('/', function (Request $request) use ($app) {
 
-    return $app['twig']->render('index.html.twig');
+    $tasks = $app['dao.task']->findAll();
+    return $app['twig']->render('index.html.twig', [
+        'tasks' => $tasks,
+    ]);
 })
 ->bind('home');
 
@@ -117,8 +120,6 @@ $app->match('/app/settings', function (Request $request) use ($app) {
     ]);
 })
 ->bind('settings');
-
-
 
 # génère un mot de passe
 $app->get('/mtp/{m}', function ($m) use ($app) {

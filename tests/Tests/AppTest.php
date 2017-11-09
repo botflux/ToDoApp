@@ -41,6 +41,7 @@ class AppTest extends WebTestCase
     {
         return [
             ['/login'],
+            ['/register'],
             ['/'],
         ];
     }
