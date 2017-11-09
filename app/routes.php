@@ -12,10 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 # Page d'accueil
 $app->get('/', function (Request $request) use ($app) {
 
-    $tasks = $app['dao.task']->findAll();
-    return $app['twig']->render('index.html.twig', [
-        'tasks' => $tasks,
-    ]);
+    return $app['twig']->render('index.html.twig');
 })
 ->bind('home');
 

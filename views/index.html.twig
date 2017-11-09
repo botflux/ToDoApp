@@ -1,5 +1,5 @@
 {% extends "layout_panel_1.html.twig" %}
-{% set truncLength = 250 %}
+{% set truncLength = 200 %}
 {% block title %}Accueil{% endblock %}
 
 {% block dashboard_left %}
@@ -7,14 +7,5 @@
 {% endblock %}
 
 {% block content %}
-    {% for task in tasks %}
-        <div class="card todo__margin-bottom-2">
-            <div class="card-body">
-                <p class="card-title">{{ task.name }}<p>
-                <p class="card-text">{{ task.content|length > truncLength ? task.content|slice(0,truncLength) ~ '...': task.content  }}<p>
-            </div>
-        </div>
-    {% else %}
-
-    {% endfor %}
+    
 {% endblock %}
