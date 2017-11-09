@@ -1,27 +1,88 @@
-<!doctype html>
-<html lang="fr">
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>ToDoApp - Connexion</title>
-    <!-- Google icons font -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css', 'bootstrap') }}">
-    <!-- My css -->
-    <link rel="stylesheet" href="{{ asset('todoapp.css', 'css') }}">
-    <!-- Google icon size style -->
-    <link rel="stylesheet" href="{{ asset('googleiconstyle.css', 'css') }}">
-</head>
-<body>
-    <div class="container">
-        
+
+{% extends "layout_panel_1.html.twig" %}
+{% block title %}Inscription{% endblock %}
+
+
+{% block dashboard_left %}{% endblock %}
+
+{% block content %}
+
+
+
+    
+    <div class="card">
+        <div class="card-body">
+        {{ form_start(userForm) }}
+            <div class="form-group">
+                {{ form_label(userForm.username, null, {
+                    'label_attr': {
+                        'class': 'form-control-label'
+                    }
+                }) }}
+                {{ form_widget(userForm.username, {
+                    'attr': {
+                        'class': 'form-control'
+                    }
+                }) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(userForm.firstName, null, {
+                    'label_attr': {
+                        'class': 'form-control-label'
+                    }
+                }) }}
+                {{ form_widget(userForm.firstName, {
+                    'attr': {
+                        'class': 'form-control'
+                    }
+                }) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(userForm.lastName, null, {
+                    'label_attr': {
+                        'class': 'form-control-label'
+                    }
+                }) }}
+                {{ form_widget(userForm.lastName, {
+                    'attr': {
+                        'class': 'form-control'
+                    }
+                }) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(userForm.password.first, null, {
+                    'label_attr': {
+                        'class': 'form-control-label'
+                    }
+                }) }}
+                {{ form_widget(userForm.password.first, {
+                    'attr': {
+                        'class': 'form-control'
+                    }
+                }) }}
+            </div>
+            <div class="form-group">
+                {{ form_label(userForm.password.second, null, {
+                    'label_attr': {
+                        'class': 'form-control-label'
+                    }
+                }) }}
+                {{ form_widget(userForm.password.second, {
+                    'attr': {
+                        'class': 'form-control'
+                    }
+                }) }}
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-primary">Créer</button>
+            </div>
+        {{ form_end(userForm) }}
+        </div>
     </div>
-<!-- Optional JavaScript -->
-<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-<script src="{{ asset('js/bootstrap.min.js', 'bootstrap') }}"></script>
-</body>
-</html>
+
+
+
+
+
+
+{% endblock %}

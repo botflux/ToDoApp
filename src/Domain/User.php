@@ -97,7 +97,7 @@ class User implements UserInterface
     /**
      * @return string
      */
-    public function getUsername(): string
+    public function getUsername()
     {
         return $this->username;
     }
@@ -115,7 +115,7 @@ class User implements UserInterface
     /**
      * @return string
      */
-    public function getPassword(): string
+    public function getPassword()
     {
         return $this->password;
     }
@@ -133,7 +133,7 @@ class User implements UserInterface
     /**
      * @return string
      */
-    public function getSalt(): string
+    public function getSalt()
     {
         return $this->salt;
     }
@@ -141,7 +141,7 @@ class User implements UserInterface
     /**
      * @return string
      */
-    public function getRole(): string
+    public function getRole()
     {
         return $this->role;
     }
@@ -159,7 +159,7 @@ class User implements UserInterface
     /**
      * @return int
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }
@@ -179,7 +179,7 @@ class User implements UserInterface
         // TODO: Implement eraseCredentials() method.
     }
     
-    public function getRoles() : array
+    public function getRoles()
     {
         return [$this->getRole()];
     }

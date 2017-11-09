@@ -28,7 +28,35 @@ $app->match('/login', function (Request $request) use ($app) {
 ->bind('login');
 
 $app->match('/register', function (Request $request) use ($app) {
-    return '';
+    $user = new \Todo\Domain\User();
+
+    $userForm = $app['form.factory']->create(\Todo\Form\Type\UserType::class, $user);
+
+    $userForm->handleRequest($request);
+
+    if ($userForm->isSubmitted()) {
+        if ($userForm->isValid()) {
+            $passwordGenerator = new \Todo\Generator\PasswordGenerator();
+            
+            $raw = $user->getPassword();
+            $salt = $passwordGenerator->generateRandomSalt();
+            $hash = $passwordGenerator->generateHash($raw, $salt);
+
+            $user->setPassword($hash);
+            $user->setSalt($salt);
+            $user->setRole('ROLE_USER');
+
+            if ($passwordGenerator->isValid($hash, $raw, $salt)) {
+                $app['dao.user']->save($user);
+            }
+        } else {
+            var_dump($app['validator']->validate($userForm));
+        }
+    }
+
+    return $app['twig']->render('register.html.twig', [
+        'userForm' => $userForm->createView(),
+    ]);
 })
 ->bind('register');
 
