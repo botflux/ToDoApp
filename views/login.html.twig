@@ -17,11 +17,8 @@
 <body>
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card bg-light todo__margin-top-4">
-                    <div class="card-header">
-                        <h1 class="card-title display-4">Connexion</h1>
-                    </div>
+            <div class="col-md-4 todo__margin-top-4">
+                <div class="card bg-light">
                     <div class="card-body">
                         <form action="{{ path('login_check') }}" method="post">
                             <div class="form-group">
@@ -44,6 +41,11 @@
                                 </div>
                             {% endif %}
                         {% endif %}
+                    </div>
+                </div>
+                <div class="card bg-light todo__margin-top-4">
+                    <div class="card-body">
+                        <p class="card-text">Nouveau sur Todoapp? <a href="{{ path('register') }}">Clique ici.</a></p>
                     </div>
                 </div>
             </div>
