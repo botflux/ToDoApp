@@ -2,10 +2,32 @@
 {% set truncLength = 200 %}
 {% block title %}Accueil{% endblock %}
 
+
+{% block jum %}
+
+<div class="jumbotron jumbotron-fluid">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <h3 class="display-3">Noveau sur Todo app?</h3>
+                    <p class="lead">Cliquez sur Inscription pour créer un compte!</p>
+                    <a href="#" class="btn btn-primary">Inscription</a>
+                {% else %}
+                    <h3 class="display-3">Créer un nouveau projet</div>
+                    
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
 {% block dashboard_left %}
 
 {% endblock %}
 
 {% block content %}
-    
+
 {% endblock %}

@@ -11,7 +11,6 @@ use Symfony\Component\HttpFoundation\Response;
 
 # Page d'accueil
 $app->get('/', function (Request $request) use ($app) {
-
     return $app['twig']->render('index.html.twig');
 })
 ->bind('home');
